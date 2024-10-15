@@ -1,0 +1,22 @@
+spring:
+  jpa:
+    hibernate:
+      ddl-auto:update
+  datasource:
+    driver-class-name: org.h2.Driver
+    username: sa
+    password:
+    url: jbdc:mariadb//localhost:3306/ebooks
+  application:
+    name: ebooks-api
+
+
+app:
+  stripe:
+    success-url: http://localhost:300/payment/success
+    cancel-url: http://localhost:300/paymente/cancel
+    private-key:
+
+jwt:
+  secret: secret
+  expiration: 2
