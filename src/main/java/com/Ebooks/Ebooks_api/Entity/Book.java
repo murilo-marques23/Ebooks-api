@@ -16,7 +16,7 @@ public class Book {
     private String Nome;
     private String img;
     private String autor;
-    private Integer preco;
+    private Long preco;
     private Integer score;
 
     @Column(name = "user_id")
