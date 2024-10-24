@@ -6,7 +6,7 @@ import com.Ebooks.Ebooks_api.Entity.Book;
 import com.Ebooks.Ebooks_api.UseCases.Book.CreateBookUseCase;
 import com.Ebooks.Ebooks_api.UseCases.Book.DeleteBookUseCase;
 import com.Ebooks.Ebooks_api.UseCases.Book.FindBookById;
-import com.Ebooks.Ebooks_api.UseCases.Book.GetAllBookById;
+import com.Ebooks.Ebooks_api.UseCases.Book.GetAllBook;
 import com.Ebooks.Ebooks_api.UseCases.FileUploadUseCase;
 import com.Ebooks.Ebooks_api.exception.Http.HttpException;
 import com.Ebooks.Ebooks_api.mappers.BookMapper;
@@ -30,12 +30,12 @@ public class BookController {
     private final BookMapper bookMapper;
     private final FindBookById findBookById;
     private final DeleteBookUseCase deleteBookUseCase;
-    private final GetAllBookById getAllBookById;
+    private final GetAllBook getAllBook;
     private final FileUploadUseCase fileUploadUseCase;
 
     @GetMapping
     public ResponseEntity<List<BookDto>> getAll() {
-        List<Book> book =this.getAllBookById.execute();
+        List<Book> book =this.getAllBook.execute();
         List<BookDto>bookDtos= book.stream().map(this.bookMapper::toOutputDto).toList();
         return new ResponseEntity<>(bookDtos, HttpStatus.OK);
     }
@@ -72,9 +72,9 @@ public class BookController {
 
 
 }
-    @GetMapping
+    @GetMapping("{id}")
     public ResponseEntity<BookDto> getById(@PathVariable("id") Long id){
-        Book book = this.getAllBookById.execute(id);
+        Book book = this.findBookById.execute(id);
         return new ResponseEntity<>(
             this.bookMapper.toOutputDto(book),
             HttpStatus.OK

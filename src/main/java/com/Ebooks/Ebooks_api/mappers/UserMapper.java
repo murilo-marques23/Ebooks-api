@@ -10,6 +10,5 @@ import org.mapstruct.Mapping;
 public interface UserMapper {
     User toEntity(CreateUserDto dto);
 
-    @Mapping(target = "roles", ignore = true)
     UserDto toOutputDto(User user);
 }
